@@ -43,6 +43,7 @@ ul.posts li {
 }
 
 .header img {
+    float: left;
     width: 450px;
     height: 190px;
   }
