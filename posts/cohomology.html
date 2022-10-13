@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Abstract bullshit</title>
+  <link rel="stylesheet" href="/assets/libs/bootstrap/bootstrap.min.css">
+  <script defer src="/assets/libs/fontawesome/all.min.js"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-icon-152x152.png">
+  <link rel="shortcut icon" href="/assets/favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+
+  <body>
+    <div class="col-lg-8 mx-auto p-3 py-md-5">
+      <header class="d-flex flex-column flex-md-row align-items-center pb-3 mb-5 border-bottom">
+  <div>
+    <a href="/" class="d-flex align-items-center text-decoration-none">
+      <span class="fs-4 fw-bold">Abstract bullshit</span>
+    </a>
+    <a href="/" class="d-flex align-items-center text-decoration-none">
+      <span>Personal site and a blog about stuff that I like</span>
+    </a>
+  </div>
+  <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+    
+  </nav>
+</header>
+
+      <div class="row g-5 mb-5">
+  <div class="col-md-12">
+    <h3>Intro to Cohomology</h3>
+    
+    <p> <b>Note:</b> The following is not intended as a detailed and thorough introduction to Cohomology but rather an informal introduction to this powerful theory by introducting it formally and then giving two different applications in the wild while trying to develop intuition to it. Hence I'll be missing a lot of technicalities and calculations. (Keep an eye out for mistakes/inaccuracies , my mom dropped me on the head once it happens to me). </p>
+    <p>We shall define a cochain complex \( \{ C_n \}_{n\in\mathbb{Z}} \) as a sequence vector spaces indexed by the integer with boundary maps \( d_n :C_n  \rightarrow C_{n+1} \) such that \( d_{n+1}d_{n}=0\) for all \(n \in \mathbb{Z}\).</p>
+
+    <p>We call an element in \(C_n \) an n-cocycle if it’s in \(\ker d_n\). and we call an element an n-coboundary if it’s in the image of \(d_{n-1}\).</p>
+
+    <p>Let \(Z^n(C) \) denote the space of n-cocycles and \(B^n(C) \) the space of n-coboundaries.
+      One can observe that the space of n-coboundaries is a subset of the set of n-cocycles. And so we shall define the important quotient:
+    </p>
+    <p> 
+      <b>Definition:</b> We shall call the following quotient \(Z^n(C)/B^n(C)\)  the <b>n-th cohomology group</b> of C and denote it as \(H^n(C)\). </p>
+      
+    <p>Note that the n-th quotient group of C is the space of equivalence classes of n-cocycles under the relation that their difference is a co-boundary. However, this all sounds very abstract and nonsense. Why one shall go and use these definitions in the first place?  One place where these definitions arise naturally is <b>Hochschild's cohomology.</b> </p>
+
+    <h3>Cohomology in the wild (Hochschild go brr)</h3>
+
+    <p>Say we are given an algebra \(A\), i.e a vector space equipped with a bilinear operation, and we want to look at \(A[\epsilon]\); the space of infinitesimal polynomials in A with \(\epsilon ^2 = 0\). (Quite arbitrary? Indeed).</p>
+
+    <p>Now say we want to define a new product  i.e \(\star\) , on \(A[\epsilon]/(\epsilon^2)\), which is bilinear on the new variable and we can determine it by the coefficients only; \(a \star b = ab + f(a,b)\epsilon \).  One can observe the following:  </p>
+
+    <ul>
+      <li>The product is unital for the usual unit of \( A[\epsilon]/(\epsilon^2)\) if \(f \) is zero whenever one argument is \(1 \in A \).</li>
+      <li>The product is associative if for any \( a,b,c \in A \) the following cocycle condition holds: </li>
+
+      $$a f (b,c)− f (ab,c)+ f (a,bc)− f (a,b)c = 0 $$
+    </ul>
+
+    <p>Note that if we denote by \( Z^2(A) \) the collection of cocycles then we defined a bijection between the set of infinitesimal deformation to first order and \(Z^2(A) \). However one shall be careful because two different cocycles can give equivalent deformations in the sense that there is an automorphism \(G: A[\epsilon] \rightarrow A[\epsilon] \) that sends one product to the other. </p>
+
+    <p>One can derive that two cocycles, \( f_1,f_2 \) giving rise to two equivalent deformations must satisfy:</p>
+
+    $$ f_1(a,b)− f_2(a,b) = ag (b)− g (ab)+ g (a)b $$ 
+
+    <p>I.e there exists a function \(g: A \rightarrow A\)  such that the above condition holds. Hence one can define a cocycle to be trivial, or rather a cobundary (yeah we’re getting there), if it is of the form \(f(a,b) = ag(b) - g(ab)+g(a)b\).  Define \(B^2(A)\)  as the space of trivial cocycles and now we are able to say more accurately the bijection; there is a bijection between the equivalent class of first-order infinitesimal deformation of A and the quotient space \(H^2(A)=Z^2(A)/B^2(A)\)  of cocycles up to boundaries.</p>
+
+    <p>This is exactly Hoschild’s cohomology. Let’s revise what we’ve done here; our initial goal was to define a product on the space of infinitesimals polynomials in a graded algebra and while doing so we found an “almost-bijection” between the infinitesimal deformation of A and the set of cocycles of form \(f: A × A \rightarrow A \). To be able to solve the “obstruction” of making this mapping a bijection we had to work modulo the class of cocycles that give rise to the same deformation. If we re-cast the whole problem as a cochain complex, that is denoted as \(C^n(A) \) as the space of functions of the form \(A × A \cdots × A \rightarrow A \), then we were dealing with the following sequence: \(C^1(A) \xrightarrow{d^1} C^2(A) \xrightarrow{d^2} C^3(A)  \). In this setting, if we define \(d^1, d^2 \) to be:</p>
+    
+    $$ (d^1g)(a,b) = ag (b)−g (ab)+g (a)b $$ 
+
+    $$ (d^2
+    f )(a,b,c) = a f (b,c)− f (ab,c)+ f (a,bc)−
+    f (a,b)c $$
+
+    <p>Then the cocycles \(Z^2(A) \) are exactly the elements in the kernel of \(d^2 \) and the “trivial cocycles”, aka the coboundaries, are those in the image of \(d^1\). Hence we worked exactly in the cohomology group of \(C^2(A)\). This is an example of encoding data using cohomology in an efficient manner that solves our problem trivially.</p>
+
+    <p>In homological algebra terms, a sequence is called exact if its cohomology groups are zero. i.e every cocycle is a coboundary. The usefulness of the cohomology theory is that it enables us to directly “tackle” the un-exactness of the sequence to make things simpler and understand them better. One can think of the un-exactness of a sequence as obstacles in the objects that we deal with, obstacles that prevent us from being simple to understand.</p>
+
+    <h3>De Rham Cohomology</h3>
+
+    <p>
+      One might argue in the previous example the initial goal was quite arbitrary and seems out of scope; why would I need to deal with this? Well if you taken Multivariate Calculus then you probably dealt with cohomology without ever knowing about it. To make this whole talk more approachable we will restrict ourself for \( \mathbb{R}^2 \). In calculus one deals mainly with two operators; derivative and integral with each being an opposite of the other. While studying vector fields you familiarized yourself with the following terms; exact forms i.e functions that are derivative of other functions \( \alpha = d\beta \) and in this case we call \( \beta \) the potential of \(\alpha \). If the derivative of a differential form (generalization of smooth functions ) vanishes it’s called closed. One can look at the following sequence:
+    </p>
+
+    $$ 0 \xrightarrow{d} \Omega^0(\mathbb{R}^2)\xrightarrow{d} \Omega^1(\mathbb{R}^2) \xrightarrow{d} \Omega^2(\mathbb{R}^2)$$
+
+    <p>We denote by \(\Omega^k(\mathbb{R}^n)\)  the space of k-forms on \(\mathbb{R^n}\). In our friendly exposition we deal with the plane and the forms are either 0-forms which are smooth functions, 1-forms the derivative and 2-forms are \(f(x,y)dx + g(x,y)dy \).  One equation students are early on exposed to is \(d^2f=0\) which in the low dimensonal context is a consequence of the partial derivatives of \(f \) being symmetric. From this equation alone one can understand that exact forms are closed; however what’s about the opposite? Is it always true? And if not when is it not?</p>
+
+    <p>Usually to answer this questions students are presented with the argument “function” \(\theta \), which is not actually a function because it’s defined up to a multiple of \(2\pi \). However we can still define \(d\theta \) and even observe it’s vanish; although \(\theta\) is not a function per-se we can still define it’s 1-form using local data by removing a single-point. So we have a differential form that is closed but not exact, but at cost of what? We just said we need to remove a single point from the plane. Note that we just changed the topology of the space we work on to be able to define this 1-form (the space is not contractible, i.e it can’t be shrunk to a point) . One might be tempted to guess there’s a connection between the underlying topology of the space we work with and the exactness of the cochain sequence we defined above. And indeed it’s true:</p>
+
+    <p><b>Poincare’s lemma</b>: If B is an open ball in \(\mathbb{R}^n\) then any smooth closed p-form \(\omega \) defined on \(B \) is exact. \((0 \leq p \leq n)\) </p>
+
+    <p>By the converse of this lemma one can utilize what’s  called De Rham Cohomology, that is as you might have guessed, defined to be \(H_{dR}^k(M) = \ker d(\Omega^k(M))/Im(d(\Omega^{k-1}(M))\) to count the number of holes in a topological space.</p>
+
+    <p>If we get back to the example we started with then one can learn that: \(H_{dR}^1(\mathbb{R}^2/\{0\})\cong \mathbb {R}  \). This is a formalism of what I just stated; the \(k^{th}\) De Rham Cohomology counts the number of k-dimensonal holes in the space.  More precisely this statement is saying that any closed form \(\omega \) is the sum of an exact form \(df \) and a multiple of \(d\theta \):</p>
+
+    $$ \omega = df + d\theta \frac{1}{2\pi} \oint_{S^1} \omega $$
+
+    <p>Note that the contour integral accounts for the obstruction of a closed-form being the derivative of a globally defined function.</p>
+    </div>
+  </body>
+</html>
